@@ -34,54 +34,54 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff59b747),
-        toolbarHeight: MediaQuery.of(context).size.height / 5,
+        toolbarHeight: MediaQuery.of(context).size.height * 0.15,
         centerTitle: true,
         title: const Text(
           'Sign In',
           textAlign: TextAlign.center,
         ),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        )),
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 50), //left top right bottom
-        constraints: const BoxConstraints.expand(),
-        color: Colors.white,
-
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            const SizedBox(height: 30),
-            _textField('Username'),
-            const SizedBox(height: 15),
-            _textField('Password'),
-            const SizedBox(height: 15),
-            RichText(
-              textAlign: TextAlign.right,
-              text: const TextSpan(
-                children: [
-                  TextSpan(text: 'Forgot: ', style: TextStyle(color: Color(0xffc4c4c4))),
-                  TextSpan(text: 'Username/Password?', style: TextStyle(color: Color(0xff8eb388))),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15),
-            ElevatedButton(
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(const Color(0xffd4ffcf)),
-                  overlayColor: MaterialStateProperty.resolveWith<Color?>(
-                    (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.hovered)) {
-                        return Colors.blue.withOpacity(0.04);
-                      }
-                      if (states.contains(MaterialState.focused) || states.contains(MaterialState.pressed)) {
-                        return Colors.blue.withOpacity(0.12);
-                      }
-                      return null; // Defer to the widget's default.
-                    },
-                  ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 40),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.85,
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              _textField('Username'),
+              const SizedBox(height: 15),
+              _textField('Password'),
+              const SizedBox(height: 15),
+              RichText(
+                textAlign: TextAlign.right,
+                text: const TextSpan(
+                  children: [
+                    TextSpan(text: 'Forgot: ', style: TextStyle(color: Color(0xffc4c4c4))),
+                    TextSpan(text: 'Username/Password?', style: TextStyle(color: Color(0xff8eb388))),
+                  ],
                 ),
+              ),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    elevation: 1,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    minimumSize: const Size(double.infinity, 55),
+                    backgroundColor: const Color(0xff59b747)),
                 onPressed: () {},
-                child: const Text('SIGN IN'))
-          ],
+                child: const Text('SIGN IN'),
+              ),
+              const Spacer(),
+              const Text('Don\'t have account', style: TextStyle(color: Color(0xffc4c4c4))),
+              const Text('SIGN UP NOW', style: TextStyle(color: Color(0xff8eb388), fontWeight: FontWeight.bold)),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );
